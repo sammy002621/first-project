@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import HelloWorldABI from "./ABI/HelloWorld.json"; // Assuming you have your contract ABI in a file
 import './App.css'; // Import the CSS file
+import {toast,Toaster} from "react-hot-toast"
 
 const App = () => {
   const [greeting, setGreeting] = useState('');
@@ -47,6 +48,7 @@ const App = () => {
           const updatedGreeting = await contract.methods.getGreeting().call({ from: account });
           setGreeting(updatedGreeting);
           setNewGreeting('');
+          toast.success("Name set");
       } catch (error) {
           console.error('Error updating greeting:', error);
       }
@@ -54,6 +56,7 @@ const App = () => {
 
   return (
       <div className="app-container">
+        <Toaster/>
           <h1 className="app-title">Hello, World and Name DApp</h1>
           <div className="input-container">
               <input 
